@@ -35,6 +35,10 @@ function dispNum(clicked){
 nums.forEach(function(button){
     button.addEventListener('click', function(){
         let num = button.textContent;
+        if(errors){
+            display.textContent = ''
+            errors = 0;
+        }
         if(num == '.'){
             if(dot){
                 dispNum(num);
