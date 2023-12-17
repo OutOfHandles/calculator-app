@@ -35,8 +35,9 @@ nums.forEach(function(button){
     button.addEventListener('click', function(){
         let num = button.textContent;
         if(errors){
-            display.textContent = ''
+            display.textContent = '';
             errors = 0;
+            console.log(errors);
         }
         if(num == '.'){
             if(dot){
@@ -57,10 +58,11 @@ opertators.forEach(function(op){
         let selected = op.textContent;
         first = 0;
         if(errors){
-            display.textContent = '0'
+            console.log(errors);
+            display.textContent = '0';
             errors = 0;
         }
-        
+
         if(handler){
             display.textContent = display.textContent.slice(0, -1);
         }
