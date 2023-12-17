@@ -8,6 +8,7 @@ let display = document.querySelector('#res');
 let first = 1;
 let handler = 0;
 let dot = 1;
+let errors = 0;
 
 function updateScroll(){
     display.parentElement.scrollLeft = display.parentElement.scrollWidth;
@@ -52,6 +53,11 @@ opertators.forEach(function(op){
     op.addEventListener('click', function(){
         let selected = op.textContent;
         first = 0;
+        if(errors){
+            display.textContent = '0'
+            errors = 0;
+        }
+        
         if(handler){
             display.textContent = display.textContent.slice(0, -1);
         }
@@ -82,17 +88,31 @@ opertators.forEach(function(op){
 });
 
 equal.addEventListener('click', function(){
-    switch(eval(display.textContent)){
-        case Infinity:
-            display.textContent = 'Undefined';
-            break;
-        case null:
+    const regex = /\d+$/;
+    if (regex.test(display.textContent)){
+        if(isNaN(eval(display.textContent))){
             display.textContent = 'Error';
-            break;
-        default:
-            display.textContent = Math.round(eval(display.textContent)*10000)/10000;
-            break;
+            first = 0;
+            errors = 1;
+        }
+        else{
+            switch(eval(display.textContent)){
+                case Infinity:
+                    display.textContent = 'Undefined';
+                    first = 0;
+                    errors = 1;
+                    break;
+                case null:
+                    display.textContent = 'Error';
+                    first = 0;
+                    errors = 1;
+                    break;
+                default:
+                    display.textContent = Math.round(eval(display.textContent)*10000)/10000;
+                    break;
+            }
+        }
+        first = 1;
+        dot = 1;
     }
-    first = 1;
-    dot = 1;
 });
