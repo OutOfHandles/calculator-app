@@ -19,7 +19,6 @@ del.addEventListener('click', function(){
     first = 1;
     handler = 0;
     dot = 1;
-    console.log(dot); 
 });
 
 function dispNum(clicked){
@@ -115,8 +114,8 @@ equal.addEventListener('click', function(){
                     display.textContent = Math.round(eval(display.textContent)*10000)/10000;
                     break;
             }
+            first = 1;
         }
-        first = 1;
         dot = 1;
     }
 });
