@@ -4,6 +4,7 @@ let equal = document.querySelector('.equals');
 let del = document.querySelector('.del');
 
 let display = document.querySelector('#res');
+let cal = '0';
 
 let first = 1;
 let handler = 0;
@@ -24,10 +25,12 @@ del.addEventListener('click', function(){
 function dispNum(clicked){
     if(first){
         display.textContent = clicked;
+        cal = clicked;
         first = 0;
     }
     else{
         display.textContent += clicked;
+        cal += clicked;
     }
 }
 
@@ -36,6 +39,7 @@ nums.forEach(function(button){
         let num = button.textContent;
         if(errors){
             display.textContent = '';
+            cal = ''
             errors = 0;
             console.log(errors);
         }
@@ -60,6 +64,7 @@ opertators.forEach(function(op){
         if(errors){
             console.log(errors);
             display.textContent = '0';
+            cal = '0';
             errors = 0;
         }
 
@@ -69,22 +74,27 @@ opertators.forEach(function(op){
         switch(selected){
             case '+':
                 display.textContent += '+';
+                cal += '+'
                 handler = 1;
                 break;
             case '-':
                 display.textContent += '-';
+                cal += '-'
                 handler = 1;
                 break;
             case 'X':
-                display.textContent += '*';
+                display.textContent += '×';
+                cal += '*'
                 handler = 1;
                 break;
             case '÷':
-                display.textContent += '/';
+                display.textContent += '÷';
+                cal += '/'
                 handler = 1;
                 break;
             case '%':
                 display.textContent = eval(display.textContent)/100;
+                cal = eval(display.textContent)/100;
                 break;
         }
         dot = 1;
@@ -95,13 +105,13 @@ opertators.forEach(function(op){
 equal.addEventListener('click', function(){
     const regex = /\d+$/;
     if (regex.test(display.textContent)){
-        if(isNaN(eval(display.textContent))){
+        if(isNaN(eval(cal))){
             display.textContent = 'Error';
             first = 0;
             errors = 1;
         }
         else{
-            switch(eval(display.textContent)){
+            switch(eval(cal)){
                 case Infinity:
                     display.textContent = 'Undefined';
                     first = 0;
@@ -113,7 +123,7 @@ equal.addEventListener('click', function(){
                     errors = 1;
                     break;
                 default:
-                    display.textContent = Math.round(eval(display.textContent)*10000)/10000;
+                    display.textContent = Math.round(eval(cal)*10000)/10000;
                     break;
             }
             first = 1;
