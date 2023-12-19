@@ -83,7 +83,7 @@ opertators.forEach(function(op){
                 cal += '-'
                 handler = 1;
                 break;
-            case 'X':
+            case '×':
                 display.textContent += '×';
                 cal += '*'
                 handler = 1;
