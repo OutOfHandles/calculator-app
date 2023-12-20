@@ -124,11 +124,13 @@ equal.addEventListener('click', function(){
                     errors = 1;
                     break;
                 default:
-                    display.textContent = Math.round(eval(cal)*10000)/10000;
+                    cal = cal = (Math.round(eval(cal)*10000)/10000).toString();
+                    display.textContent = cal;
                     break;
             }
             first = 1;
         }
         dot = 1;
+        console.log(cal +"\n" + display.textContent);
     }
 });
